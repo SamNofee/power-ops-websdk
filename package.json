@@ -1,0 +1,105 @@
+{
+  "name": "power-ops-websdk",
+  "version": "0.0.2",
+  "description": "The Web SDK of Power Ops Platform",
+  "author": "SamNofee",
+  "type": "module",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.cjs"
+    },
+    "./lib/core": {
+      "import": "./lib/core.js",
+      "require": "./lib/core.cjs"
+    },
+    "./lib/http": {
+      "import": "./lib/http.js",
+      "require": "./lib/http.cjs"
+    }
+  },
+  "main": "./lib/index.js",
+  "homepage": "https://github.com/SamNofee/power-ops-websdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SamNofee/power-ops-websdk.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "npx rollup -c",
+    "tsc": "npx tsc --outDir dist -p tsconfig.json",
+    "lint": "npx eslint . --ext .ts",
+    "format": "npx prettier --write \"src/\"",
+    "c8": "npx c8 --check-coverage npm run test",
+    "test": "NODE_OPTIONS=\"--loader ts-node/esm --experimental-specifier-resolution=node\" npx mocha --config .mocharc.json \"src/**/*.test.ts\" --",
+    "test:grep": "npm run test -- --grep",
+    "install:hook": "npx husky install"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "color": "^4.2.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
+    "@types/color": "^3.0.6",
+    "@types/mocha": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.48.2",
+    "@typescript-eslint/parser": "^5.48.2",
+    "c8": "^7.13.0",
+    "eslint": "^8.32.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "glob": "^10.2.5",
+    "mocha": "^10.0.0",
+    "rollup": "^3.22.0",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "prettier": "^3.1.0",
+    "should": "^13.2.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.3"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "header-max-length": [
+        2,
+        "always",
+        50
+      ],
+      "type-enum": [
+        2,
+        "always",
+        [
+          "feat",
+          "fix",
+          "refactor"
+        ]
+      ],
+      "type-case": [
+        2,
+        "always",
+        "lowerCase"
+      ],
+      "subject-case": [
+        2,
+        "always",
+        "sentence-case"
+      ]
+    }
+  },
+  "c8": {
+    "src": [
+      "src"
+    ],
+    "report-dir": "coverage",
+    "reporter": [
+      "html",
+      "text"
+    ]
+  }
+}

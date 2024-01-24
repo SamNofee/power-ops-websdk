@@ -1,0 +1,17 @@
+{
+  "editor.tabSize": 2,
+  "editor.minimap.enabled": false,
+  "eslint.format.enable": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "mochaExplorer.files": "src/**/*.test.ts",
+  "mochaExplorer.require": "ts-node/register",
+  "mochaExplorer.env": {
+    "NODE_OPTIONS": "--loader ts-node/esm --experimental-specifier-resolution=node"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
