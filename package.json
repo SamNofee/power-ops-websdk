@@ -17,6 +17,10 @@
     "./lib/http": {
       "import": "./lib/http.js",
       "require": "./lib/http.cjs"
+    },
+    "./lib/ui": {
+      "import": "./lib/ui.js",
+      "require": "./lib/ui.cjs"
     }
   },
   "main": "./lib/index.js",

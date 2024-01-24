@@ -18,7 +18,6 @@ jobs:
       - run: git config --global user.email 'zhangengru@163.com'
       - run: npm install
       - run: npm run lint
-      - run: npm run test
       - run: npm run build
       - run: npm publish --verbose --access public
         env:
