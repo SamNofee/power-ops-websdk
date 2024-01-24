@@ -6,6 +6,7 @@ build
 dist
 lib
 demo*
+example
 
 package-lock.json
 

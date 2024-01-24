@@ -1,6 +1,6 @@
 {
   "name": "power-ops-websdk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The Web SDK of Power Ops Platform",
   "author": "SamNofee",
   "type": "module",
