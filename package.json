@@ -1,8 +1,11 @@
 {
   "name": "power-ops-websdk",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "The Web SDK of Power Ops Platform",
   "author": "SamNofee",
+  "bin": {
+    "websdk-cli": "./lib/bin.cjs"
+  },
   "type": "module",
   "types": "./lib/index.d.ts",
   "exports": {
@@ -17,13 +20,8 @@
     "./lib/http": {
       "import": "./lib/http.js",
       "require": "./lib/http.cjs"
-    },
-    "./lib/ui": {
-      "import": "./lib/ui.js",
-      "require": "./lib/ui.cjs"
     }
   },
-  "main": "./lib/index.js",
   "homepage": "https://github.com/SamNofee/power-ops-websdk",
   "repository": {
     "type": "git",
@@ -32,6 +30,7 @@
   "license": "MIT",
   "scripts": {
     "build": "npx rollup -c",
+    "docs": "npx typedoc --out docs src/index.ts --titleLink \"https://jk.i3060.com\" --name \"Power Ops WebSDK\"",
     "tsc": "npx tsc --outDir dist -p tsconfig.json",
     "lint": "npx eslint . --ext .ts",
     "format": "npx prettier --write \"src/\"",
@@ -43,27 +42,31 @@
   "engines": {
     "node": ">=14"
   },
-  "dependencies": {
-    "color": "^4.2.3"
-  },
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "@types/color": "^3.0.6",
     "@types/mocha": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
     "c8": "^7.13.0",
+    "color": "^4.2.3",
+    "commander": "^11.1.0",
     "eslint": "^8.32.0",
     "eslint-plugin-prettier": "^5.0.1",
     "glob": "^10.2.5",
     "mocha": "^10.0.0",
+    "prettier": "^3.1.0",
     "rollup": "^3.22.0",
     "rollup-plugin-typescript2": "^0.34.1",
-    "prettier": "^3.1.0",
+    "rollup-plugin-visualizer": "^5.12.0",
     "should": "^13.2.3",
     "ts-node": "^10.9.1",
-    "typescript": "^4.8.3"
+    "typedoc": "^0.25.7",
+    "typescript": "^4.8.3",
+    "vue": "^3.4.15"
   },
   "commitlint": {
     "extends": [

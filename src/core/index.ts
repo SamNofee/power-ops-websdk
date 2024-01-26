@@ -23,9 +23,12 @@ export type UserStatusType = (typeof UserStatusSet)[number]
 export const UserObjectTypeSet = ['GLOBAL', 'SITE'] as const
 export type UserObjectType = (typeof UserObjectTypeSet)[number]
 
+/**
+ * 组织树节点，公司 > 电站 > 部门
+ */
 export interface Node {
   name: string
-  uuid: string,
+  uuid: string
   objectType?: NodeObjectType
   childrenUuids?: string[]
 }
@@ -61,14 +64,24 @@ export interface CoreWindow {
 }
 
 export interface CoreDocument {
-  getElementById(id: string): Element | null
+  getElementById(id: string): any | null
+  createElement(tag: string): any
+  head: {
+    appendChild(child: any): void
+  }
 }
 
+/**
+ * 上下文，浏览器环境传 window 和 document，NodeJS 环境传 null
+ */
 export interface CoreOptions {
   window: any
   document: any
 }
 
+/**
+ * 核心类，SDK 的基础，可以获取 Token、颜色、基础信息
+ */
 export class Core {
   private window: CoreWindow
   private document: CoreDocument
@@ -82,32 +95,53 @@ export class Core {
     if (options.document) this.document = options.document as CoreDocument
   }
 
+  /**
+   * 是否是正式环境
+   */
   public isProd(): boolean {
     return this.window.injected?.isProd || false
   }
 
+  /**
+   * 获取 Token，如果没登录会被弹出到登录界面
+   */
   public getToken(): string | null {
     return this.window.localStorage.getItem(this.kToken)
   }
 
+  /**
+   * 获取当前应用的 UUID
+   */
   public getAppUuid(): string | null {
     return this.window.injected?.uuid || null
   }
 
+  /**
+   * 获取 URL 参数，当前页面是 /plugin/xxxxxx?key=foo 的话 getParam('key') 返回 foo
+   */
   public getParam(key: string): string | null {
     const params = new URLSearchParams(this.window.location.search)
     const param = params.get(key)
     return param
   }
 
+  /**
+   * 获取当前主题
+   */
   public getColorScheme(): ColorScheme {
     return (this.window.localStorage.getItem(this.kColorScheme) || 'dark') as ColorScheme
   }
 
+  /**
+   * 设置当前主题，这会重新加载页面
+   */
   public setColorScheme(scheme: ColorScheme) {
     this.window.localStorage.setItem(this.kColorScheme, scheme)
   }
 
+  /**
+   * 获取选择的电站
+   */
   public getSelectedSite(): Node | null {
     const cache = this.window.localStorage.getItem(this.kKVCache)
     if (!cache) return null
@@ -115,6 +149,9 @@ export class Core {
     return JSON.parse(cache)?.selectedSite || null
   }
 
+  /**
+   * 获取当前用户的信息
+   */
   public getCurrentUser(): User | null {
     const cache = this.window.localStorage.getItem(this.kKVCache)
     if (!cache) return null
@@ -122,10 +159,32 @@ export class Core {
     return JSON.parse(cache)?.current || null
   }
 
+  /**
+   * 前往登录页面
+   */
   public login() {
     this.window.location.href = `/login?last=${this.window.location.pathname}`
   }
 
+  /**
+   * 异步加载 Script
+   */
+  public async loadScript(src: string) {
+    const script = this.document.createElement('script')
+    script.type = 'module'
+    script.src = src
+    script.async = true
+
+    return new Promise((resolve, reject) => {
+      script.onload = resolve
+      script.onerror = reject
+      this.document.head.appendChild(script)
+    })
+  }
+
+  /**
+   * 获取颜色
+   */
   public getColor(
     name: ColorName,
     level: ColorLevel,

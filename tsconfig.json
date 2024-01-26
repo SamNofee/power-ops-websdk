@@ -23,7 +23,7 @@
     "skipDefaultLibCheck": true,
     "preserveSymlinks": true,
     "resolveJsonModule": true,
-    "lib": [ "esnext", "DOM" ],
+    "lib": [ "esnext" ],
     "sourceMap": false,
     "declaration": true
   },

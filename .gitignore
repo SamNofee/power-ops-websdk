@@ -7,6 +7,7 @@ dist
 lib
 demo*
 example
+stats.html
 
 package-lock.json
 

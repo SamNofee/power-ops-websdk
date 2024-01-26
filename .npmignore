@@ -5,3 +5,9 @@ rollup.config.js
 .mocharc.json
 package-lock.json
 .DS_Store
+stats.html
+docs
+.vscode
+example
+.husky
+.github

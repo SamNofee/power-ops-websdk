@@ -1,9 +1,16 @@
 import typescript from 'rollup-plugin-typescript2'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
 import * as glob from 'glob'
 import path from 'node:path'
+import { visualizer } from 'rollup-plugin-visualizer'
 import { fileURLToPath } from 'node:url'
+import commonjs from '@rollup/plugin-commonjs'
 
-export default {
+// rollup.config.js
+/**
+ * @type {import('rollup').RollupOptions}
+ */
+const config = {
 	input: Object.fromEntries(
     glob.sync('src/**/*.ts').map(file => [
       path.relative(
@@ -16,19 +23,22 @@ export default {
     {
       dir: 'lib',
       format: 'esm',
-      preserveModules: true,
       entryFileNames: '[name].js'
     },
     {
       dir: 'lib',
       format: 'cjs',
-      preserveModules: true,
       entryFileNames: '[name].cjs'
     }
   ],
   plugins: [
+    commonjs(),
+    nodeResolve(),
     typescript({
       tsconfig: 'tsconfig.json',
     }),
+    visualizer()
   ],
 }
+
+export default config
