@@ -1,6 +1,6 @@
 {
   "name": "power-ops-websdk",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "The Web SDK of Power Ops Platform",
   "author": "SamNofee",
   "bin": {
@@ -30,7 +30,7 @@
   "license": "MIT",
   "scripts": {
     "build": "npx rollup -c",
-    "docs": "npx typedoc --out docs src/index.ts --titleLink \"https://jk.i3060.com\" --name \"Power Ops WebSDK\"",
+    "docs": "npx typedoc --includeVersion --out docs src/index.ts --readme README.md --name \"Power Ops WebSDK\"",
     "tsc": "npx tsc --outDir dist -p tsconfig.json",
     "lint": "npx eslint . --ext .ts",
     "format": "npx prettier --write \"src/\"",

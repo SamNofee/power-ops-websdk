@@ -12,20 +12,22 @@
 
 
 <p align="center">
-    <img alt="NPM Downloads" src="https://img.shields. io/npm/dt/power-ops-websdk">
-    <img alt="GitHub License" src="https://img.shields.io/github/license/SamNofee/power-ops-websdk">
-    <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/SamNofee/power-ops-websdk/npm.yml">
+  <img alt="NPM Downloads" src="https://img.shields.io/npm/dt/power-ops-websdk">
+  <img alt="GitHub License" src="https://img.shields.io/github/license/SamNofee/power-ops-websdk">
+  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/SamNofee/power-ops-websdk/npm.yml">
 </p>
 
 ---
 
+<br />
+
 # WEB SDK (Beta 阶段)
 
-> I3060 致力于成为新能源数字化平台中的基础设施，一个保持最大开放性和兼容性的 SaaS 平台，Web SDK 就是实现这一目的的重要对外口，我们欢迎第三方新能源数字化信息服务提供商，接入到我们的平台中，一起助力电力行业数字化建设和「3060 双碳计划」
+> **官网：[jk.i3060.com](/https://jk.i3060.com)**
 
+I3060 致力于成为新能源数字化平台中的基础设施，一个保持最大开放性和兼容性的 SaaS 平台，Web SDK 就是实现这一目的的重要对外口，我们欢迎第三方新能源数字化信息服务提供商，接入到我们的平台中，一起助力电力行业数字化建设和「3060 双碳计划」
 
-> 官网：[jk.i3060.com](/https://jk.i3060.com)
-
+<br />
 
 ## SDK 功能介绍
 
@@ -35,6 +37,7 @@
 - Web SDK 遵循 MIT 协议源代码开放
 - 移动端受到内置优化
 
+<br />
 
 ## 快速上手
 
@@ -63,7 +66,10 @@ console.log(core.getToken()) // 如果没登录，会被弹出到登录界面
 console.log(core.getCurrentUser())
 ```
 
+<br />
+
 ## API Reference
 
-#### Core Kit
-#### Http Kit
+[**Core Kit**](https://samnofee.github.io/power-ops-websdk/classes/Core.html): 核心类
+
+[**Http Kit**](https://samnofee.github.io/power-ops-websdk/classes/Http.html): OpenAPI 类
