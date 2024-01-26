@@ -8,6 +8,7 @@ lib
 demo*
 example
 stats.html
+docs
 
 package-lock.json
 
