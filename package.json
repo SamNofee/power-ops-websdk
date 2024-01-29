@@ -1,6 +1,6 @@
 {
   "name": "power-ops-websdk",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "The Web SDK of Power Ops Platform",
   "author": "SamNofee",
   "bin": {
@@ -32,6 +32,7 @@
     "build": "npx rollup -c",
     "docs": "npx typedoc --includeVersion --out docs src/index.ts --readme README.md --name \"Power Ops WebSDK\"",
     "tsc": "npx tsc --outDir dist -p tsconfig.json",
+    "ts": "node --es-module-specifier-resolution=node --loader ts-node/esm",
     "lint": "npx eslint . --ext .ts",
     "format": "npx prettier --write \"src/\"",
     "c8": "npx c8 --check-coverage npm run test",
@@ -46,6 +47,7 @@
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
     "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@types/color": "^3.0.6",
     "@types/mocha": "^10.0.0",
@@ -56,6 +58,8 @@
     "commander": "^11.1.0",
     "eslint": "^8.32.0",
     "eslint-plugin-prettier": "^5.0.1",
+    "fflate": "^0.8.1",
+    "form-data": "^4.0.0",
     "glob": "^10.2.5",
     "mocha": "^10.0.0",
     "prettier": "^3.1.0",

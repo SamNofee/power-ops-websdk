@@ -1,5 +1,6 @@
 import typescript from 'rollup-plugin-typescript2'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
+import json from '@rollup/plugin-json'
 import * as glob from 'glob'
 import path from 'node:path'
 import { visualizer } from 'rollup-plugin-visualizer'
@@ -27,12 +28,15 @@ const config = {
     },
     {
       dir: 'lib',
+      banner: '#!/usr/bin/env node',
       format: 'cjs',
+      preserveModules: true,
       entryFileNames: '[name].cjs'
     }
   ],
   plugins: [
     commonjs(),
+    json(),
     nodeResolve(),
     typescript({
       tsconfig: 'tsconfig.json',

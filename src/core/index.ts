@@ -17,6 +17,9 @@ export interface User {
 export const GenderSet = ['FEMALE', 'MALE', 'SECRET'] as const
 export type GenderType = (typeof GenderSet)[number]
 
+export const UIKeySet = ['MODULE_HEADER'] as const
+export type UIKeyType = (typeof UIKeySet)[number]
+
 export const UserStatusSet = ['DELETED', 'NORMAL', 'BLOCKED'] as const
 export type UserStatusType = (typeof UserStatusSet)[number]
 
@@ -77,6 +80,7 @@ export interface CoreDocument {
 export interface CoreOptions {
   window: any
   document: any
+  endpoint?: string
 }
 
 /**
@@ -85,6 +89,7 @@ export interface CoreOptions {
 export class Core {
   private window: CoreWindow
   private document: CoreDocument
+  private endpoint = 'https://jk.i3060.com'
 
   private kColorScheme = '__APP_COLOR_SCHEME'
   private kToken = '__APP_TOKEN'
@@ -93,6 +98,7 @@ export class Core {
   constructor(options: CoreOptions) {
     if (options.window) this.window = options.window as CoreWindow
     if (options.document) this.document = options.document as CoreDocument
+    if (options?.endpoint) this.endpoint = options.endpoint
   }
 
   /**
@@ -103,10 +109,21 @@ export class Core {
   }
 
   /**
-   * 获取 Token，如果没登录会被弹出到登录界面
+   * 获取 Token，如果没登录会被弹出到登录界面，登录成功后会重定向回当前页面
    */
   public getToken(): string | null {
-    return this.window.localStorage.getItem(this.kToken)
+    const paramToken = this.getParam('token')
+    if (paramToken) {
+      this.window.localStorage.setItem(this.kToken, paramToken)
+    }
+
+    const token = this.window.localStorage.getItem(this.kToken)
+    if (!token) {
+      this.login()
+      return null
+    }
+
+    return token
   }
 
   /**
@@ -163,7 +180,15 @@ export class Core {
    * 前往登录页面
    */
   public login() {
-    this.window.location.href = `/login?last=${this.window.location.pathname}`
+    this.window.location.href = `${this.endpoint}/login?signature=true?last=${decodeURIComponent(this.window.location.href)}`
+  }
+
+  /**
+   * 加载 Web Component
+   * 例如：await loadUI('MODULE_HEADER') 调用后就可以直接用 <websdk-module-header />
+   */
+  public async loadUI(key: UIKeyType) {
+    return this.loadScript(`${this.endpoint}/websdk/${key.toLowerCase()}.js`)
   }
 
   /**

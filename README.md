@@ -60,10 +60,34 @@ import { Core } from 'power-ops-websdk/lib/core/index'
 // 下面这种引入方式打包体积会变大
 // import { Core } from 'power-ops-websdk'
 
-const core = new Core({ context: window })
+const core = new Core({ window, document })
 
 console.log(core.getToken()) // 如果没登录，会被弹出到登录界面
 console.log(core.getCurrentUser())
+```
+
+<br />
+
+## CLI Reference
+
+打包为压缩包
+```sh
+npx websdk-cli build --manifest manifest.json --input ./dist --pack dist.zip
+```
+
+部署压缩包
+```sh
+# KEY 和 UUID 可在 https://jk.i3060.com/developer 获取
+export KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+export UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+npx websdk-cli deploy --key $KEY --uuid $UUID --pack dist.zip --endpoint https://jk.i3060.com
+```
+
+查看 CLI 帮助
+```sh
+npx websdk-cli -h
+npx websdk-cli build -h
+npx websdk-cli deploy -h
 ```
 
 <br />
