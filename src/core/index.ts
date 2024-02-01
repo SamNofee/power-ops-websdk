@@ -180,7 +180,7 @@ export class Core {
    * 前往登录页面
    */
   public login() {
-    this.window.location.href = `${this.endpoint}/login?signature=true?last=${decodeURIComponent(this.window.location.href)}`
+    this.window.location.href = `${this.endpoint}/login?signature=true&last=${encodeURIComponent(this.window.location.href)}`
   }
 
   /**
