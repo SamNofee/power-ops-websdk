@@ -10,7 +10,7 @@ export interface User {
   gender: GenderType
   createdTime: string
   avatarFileId?: string
-  roles?: Node[]
+  roles?: Role[]
   roleUuids: string[]
 }
 
@@ -27,17 +27,18 @@ export const UserObjectTypeSet = ['GLOBAL', 'SITE'] as const
 export type UserObjectType = (typeof UserObjectTypeSet)[number]
 
 /**
- * 组织树节点，公司 > 电站 > 部门
+ * 组织树节点，公司 电站 部门
  */
-export interface Node {
+export interface Role {
   name: string
   uuid: string
-  objectType?: NodeObjectType
+  virtual?: boolean
+  objectType?: RoleObjectType
   childrenUuids?: string[]
 }
 
-export const NodeObjectTypeSet = ['DEPARTMENT', 'SITE', 'COMPANY'] as const
-export type NodeObjectType = (typeof NodeObjectTypeSet)[number]
+export const RoleObjectTypeSet = ['DEPARTMENT', 'SITE', 'COMPANY'] as const
+export type RoleObjectType = (typeof RoleObjectTypeSet)[number]
 
 export const ColorNameSet = ['main', 'char', 'primary', 'error', 'warning', 'success', 'info'] as const
 export type ColorName = (typeof ColorNameSet)[number]
@@ -74,8 +75,10 @@ export interface CoreDocument {
   }
 }
 
+
+
 /**
- * 上下文，浏览器环境传 window 和 document，NodeJS 环境传 null
+ * 上下文，浏览器环境传 window 和 document，RoleJS 环境传 null
  */
 export interface CoreOptions {
   window: any
@@ -93,7 +96,7 @@ export class Core {
 
   private kColorScheme = '__APP_COLOR_SCHEME'
   private kToken = '__APP_TOKEN'
-  private kKVCache = '__APP_KV_CACHE'
+  private kKVCache = '__APP_CLIENT_KV_CACHE'
 
   constructor(options: CoreOptions) {
     if (options.window) this.window = options.window as CoreWindow
@@ -159,7 +162,7 @@ export class Core {
   /**
    * 获取选择的电站
    */
-  public getSelectedSite(): Node | null {
+  public getSelectedSite(): Role | null {
     const cache = this.window.localStorage.getItem(this.kKVCache)
     if (!cache) return null
 
