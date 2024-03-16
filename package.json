@@ -1,6 +1,6 @@
 {
   "name": "power-ops-websdk",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "The Web SDK of Power Ops Platform",
   "author": "SamNofee",
   "bin": {
@@ -16,10 +16,6 @@
     "./lib/core": {
       "import": "./lib/core.js",
       "require": "./lib/core.cjs"
-    },
-    "./lib/http": {
-      "import": "./lib/http.js",
-      "require": "./lib/http.cjs"
     }
   },
   "homepage": "https://github.com/SamNofee/power-ops-websdk",

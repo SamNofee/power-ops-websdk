@@ -95,5 +95,3 @@ npx websdk-cli deploy -h
 ## API Reference
 
 [**Core Kit**](https://samnofee.github.io/power-ops-websdk/classes/Core.html): 核心类
-
-[**Http Kit**](https://samnofee.github.io/power-ops-websdk/classes/Http.html): OpenAPI 类

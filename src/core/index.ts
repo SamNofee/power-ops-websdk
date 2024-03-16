@@ -75,8 +75,6 @@ export interface CoreDocument {
   }
 }
 
-
-
 /**
  * 上下文，浏览器环境传 window 和 document，RoleJS 环境传 null
  */
@@ -109,6 +107,13 @@ export class Core {
    */
   public isProd(): boolean {
     return this.window.injected?.isProd || false
+  }
+
+  /**
+   * 获取 Endpoint
+   */
+  public getEndpoint(): string {
+    return this.endpoint
   }
 
   /**
